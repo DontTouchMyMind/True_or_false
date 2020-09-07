@@ -1,4 +1,6 @@
-from typing import Callable
+from typing import Callable, List
+
+from question import Question
 
 
 class Game:
@@ -8,5 +10,21 @@ class Game:
         self.__allowed_mistakes = allowed_mistakes
         self.__end_of_game_event = end_of_game_event
         self.__mistakes_counter = 0
-        self.__question = []
+        self.__question: List[Question] = []
         self.__questions_counter = 0
+
+        self.__load_question(file_path, self.__question)
+
+    def __load_question(self, file_path, question):
+        with open(file_path, encoding='utf8') as file:
+            for line in file:
+                _ = self.__parse_line(line)
+                question.append()
+
+    def __parse_line(self, line):
+        parts = line.split(';')
+        text = parts[0]
+        is_correct = parts[1]
+        explanation = parts[2]
+        return Question(text, is_correct, explanation)
+        
