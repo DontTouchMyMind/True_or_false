@@ -1,5 +1,6 @@
 from typing import Callable, List
 
+from game_status import GameStatus
 from question import Question
 
 
@@ -12,6 +13,7 @@ class Game:
         self.__mistakes_counter = 0
         self.__question: List[Question] = []
         self.__questions_counter = 0
+        self.__game_status = GameStatus.IN_PROGRESS
 
         self.__load_question(file_path, self.__question)
 
@@ -27,4 +29,7 @@ class Game:
         is_correct = parts[1]
         explanation = parts[2]
         return Question(text, is_correct, explanation)
-        
+
+    @property
+    def game_status(self):
+        return self.__game_status
