@@ -7,6 +7,7 @@ def end_of_game_handler(result: GameResult):
     print(f'Question asked: {result.questions_passed}. Mistakes made: {result.mistakes_made}')
     print('You are winner!' if result.won else 'You are loser!')
 
+
 game = Game('data/Questions.csv', end_of_game_handler, allowed_mistakes=3)
 
 while game.game_status == GameStatus.IN_PROGRESS:
