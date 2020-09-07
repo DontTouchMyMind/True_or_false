@@ -26,7 +26,7 @@ class Game:
         with open(file_path, encoding='utf8') as file:
             for line in file:
                 _ = self.__parse_line(line)
-                question.append()
+                question.append(_)
 
     def __parse_line(self, line) -> Question:
         """
@@ -36,7 +36,7 @@ class Game:
         """
         parts = line.split(';')
         text = parts[0]
-        is_correct = parts[1]
+        is_correct = parts[1] == 'Yes'
         explanation = parts[2]
         return Question(text, is_correct, explanation)
 
