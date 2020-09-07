@@ -33,3 +33,7 @@ class Game:
     @property
     def game_status(self):
         return self.__game_status
+
+    def get_next_questions(self) -> Question:
+        return self.__question[self.__questions_counter]
+    
