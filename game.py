@@ -36,4 +36,8 @@ class Game:
 
     def get_next_questions(self) -> Question:
         return self.__question[self.__questions_counter]
+
+    def give_answer(self, answer: bool):
+        if self.__question[self.__questions_counter].is_true != answer:
+            self.__mistakes_counter += 1
     
