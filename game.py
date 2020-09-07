@@ -1,5 +1,6 @@
 from typing import Callable, List
 
+from game_result import GameResult
 from game_status import GameStatus
 from question import Question
 
@@ -38,6 +39,20 @@ class Game:
         return self.__question[self.__questions_counter]
 
     def give_answer(self, answer: bool):
+        def is_last_question():
+            return self.__questions_counter == len(self.__question) - 1
+
+        def exceeded_allowed_mistakes():
+            return self.__mistakes_counter > self.__allowed_mistakes
+
         if self.__question[self.__questions_counter].is_true != answer:
             self.__mistakes_counter += 1
-    
+
+        if is_last_question() or exceeded_allowed_mistakes():
+            self.__game_status = GameStatus.GAME_IS_OVER
+
+            result = GameResult(self.__questions_counter, self.__mistakes_counter,
+                                self.__mistakes_counter <= self.__allowed_mistakes)
+
+            self.__end_of_game_event(result)
+        self.__questions_counter += 1
